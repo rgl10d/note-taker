@@ -6,22 +6,22 @@ const app = express();
 
 const PORT = process.env.PORT || 8080;
 
+// Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
+// Middleware for statuc file connection (The CSS)
+app.use(express.static(path.join(__dirname, 'public')));
 
 // View routes
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "index.html"));
+    res.sendFile(path.join(__dirname, "/public/index.html"));
 });
-
 app.get("/notes", (req, res) => {
-    res.sendFile(path.join(__dirname, "notes.html"));
+    res.sendFile(path.join(__dirname, "/public/notes.html"));
 });
-
 
 // API routes
-app.get("/api/config", (req, res) => {
+app.get("/api/notes", (req, res) => {
     res.json({
         success: "true"
     });
