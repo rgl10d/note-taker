@@ -19,13 +19,13 @@ Technologies used:
 * [License](#license)
 
 ## Installation
-Nothing needs to be installed! Just head over to:
+Nothing needs to be installed! Just head over to: https://ancient-dawn-26829.herokuapp.com/
 
 ## Usage 
 
-DEMO VIDEO: 
-
 Simply type in your notes section title and the notes themselves on the right portion of the screen and hit the save button at the top right when you're finished to save them.
+
+![screenshot](/public/assets/notespage.png)
 
 ## Questions?
 
