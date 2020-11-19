@@ -34,26 +34,27 @@ app.get("/", (req, res) => {
 // API ROUTES
 // GET NOTES
 app.get("/api/notes", (req, res) => {
-    // Should read the `db.json` file and return all saved notes as JSON.
     fs.readFile(dbFile, (err, data) => {
         if (err) throw err;
-        const savedNotes = JSON.parse(data);
-        console.log(savedNotes);
-        return res.json(savedNotes);
+        return res.json(JSON.parse(data));
       });
 });
 // POST NEW NOTE
 app.post('/api/notes', (req, res) => {
     const newNotes = JSON.parse(fs.readFileSync(dbFile));
-    newNotes.id = guidGenerator();
+    req.body.id = guidGenerator();
     newNotes.push(req.body);
     fs.writeFileSync(dbFile, JSON.stringify(newNotes));
     return res.json(newNotes);
 });
 // DELETE A NOTE
 app.delete("/api/notes/:id", (req, res) => {
-    // Should receive a query parameter containing the id of a note to delete.
-    // In order to delete a note, you'll need to read all notes from the db.json file, remove the note with the given id property, and then rewrite the notes to the db.json file.
+    const savedNotes = JSON.parse(fs.readFileSync(dbFile));
+    savedNotes.splice(savedNotes.findIndex(function(i){
+        return i.id === req.params.id;
+    }), 1);
+    fs.writeFileSync(dbFile, JSON.stringify(savedNotes));
+    return res.json(savedNotes);
 })
 
 
